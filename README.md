@@ -1,30 +1,29 @@
-# UpdateInfDev
-An Unofficial Bash script for updating the Minecraft InfDev+ mod by the Legacy+ team using the terminal on Linux,
+# InfDev+ Auto-Updater Script
 
-The script needs to be modified by pasting the location of your MultiMC's Infdev+ Instance folder as the value for the variable `INSTANCE_DIR`.
+I made this script to automatically update the InfDev+ mod using a terminal command instead of messing with the MultiMC GUI every time there is a new build.
 
-# How does it works.
+### Setup
+The script needs you to set your instance path. Open the script file and paste the location of your MultiMC Infdev+ Instance folder in the `INSTANCE_DIR` variable.
 
-The script uses the fact that the `.jar` files that MultiMC uses to overwrite the origal Minecraft's jar, are stored inside the route `instances/[Instance_name]/jarmods`. There, it's the `InfdevPlus-Client.jar `labeled as "InfDev+ Client" on the setting menu of MultiMC.
+### How it works
+MultiMC handles jar-modding by storing specific files in `instances/[Instance_name]/jarmods`. Inside this folder, you'll find `InfdevPlus-Client.jar` (the file labeled as "InfDev+ Client" in your MultiMC settings).
 
-By replacing this file you can update the game via a script without having to follow the official update process.
+By replacing this file directly, the script updates the game without following the manual official process.
 
-# Update process
+### Update Process
+1. **Initial Backup**: On the first run, the script creates a one-time backup of your original .jar file in a folder called `og_jar_backup`.
+2. **Download**: It fetches the latest version from the official Google Drive link and saves it to a temporary location.
+3. **Safety Check**: If the download is successful, the script creates a timestamped backup of your current version before overwriting it.
+4. **Installation**: The new version is moved to the `jarmods` folder.
 
-First the script created a one-time backup for your original .jar file for that InfDev+ instance.
+### Notes
+- The script keeps up to 5 backups (you can change this number in the config section). 
+- Backups are sorted by date and time because I couldn't find a reliable version string inside the jar file to use for naming.
+- The script messages are in spanish because I first thought of using this only for myself.
+- The download can take a few seconds to start. Not because of your internet connection, but because of some strange caveats with Google Drive's dowload link.
+- The download link is based of the original InfDev+ file link, but slightly modified with the parameter `export=download` so it can be used inside a script with wget(bash) or irq(ps1).
 
-Then, the script takes the official google drive link as a direct download link and saved the downloaded file in a temp folder.
+---
 
-On a succesfull download, the script created a backup of the current game version and copies the newly downloaded version onto the `jarmods` folder.
-
-# Notes
-
-The script allows up to 5 (configurable via editing the number inside the script)  backups.
-
-Each backup is created by date and time of download, rather than game version. This is because i couldn't find any version string inside the downloaded jar.
-
-Also the script is in spanish bc i speak spanish.
-
---- 
-
-Link used  as a download for the script: `https://drive.google.com/uc?export=download&id=1JRmzcxxDojXMr52W9u5uBfi1pwN80s6O`
+**Download Link used by the script:**
+https://drive.google.com/uc?export=download&id=1JRmzcxxDojXMr52W9u5uBfi1pwN80s6O
